@@ -29,7 +29,7 @@ namespace Hierh.API
             request.AddParameter("grant_type", "client_credentials");
             request.AddParameter("client_id", "6731de76-14a6-49ae-97bc-6eba6914391e");
             request.AddParameter("scope", "https://graph.microsoft.com/.default");
-            request.AddParameter("client_secret", "JqQX2PNo9bpM0uEihUPzyrh");
+            request.AddParameter("client_secret", "JqQX2PNo9bpM0uEihUPrh");
             var response = client.Execute(request, Method.Post);
             if (response.IsSuccessful)
             {
