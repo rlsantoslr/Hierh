@@ -1,0 +1,78 @@
+﻿@page "/dashboard"
+@using Hierh.API;
+@using Hierh.Models;
+@inherits LayoutComponentBase
+<PageTitle>Hierh - Saúde familiar</PageTitle>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-white p-3">
+                <strong class="text-secondary">Minhas Propensões</strong>
+                <div class="btn-group btn-group-sm float-end">
+                    <a href="/dashboard/newmember" class="btn btn-secondary"><i class="fas fa-user-plus"></i> Vincular membro</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="text-secondary">
+                            <th>Doença Hereditária</th>
+                            <th>Probabilidade (%)</th>
+                            <th>Membros</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var d in DiseaseTypes)
+                        {
+                            <tr>
+                                <td>@d</td>
+                                <td>@(Data.Count(x => x.Diseases.Exists(x => x.Name.Equals(d))) * 100 / Data.Count)%</td>
+                                <td>
+                                    @foreach (var f in Data.Where(x => x.Diseases.Exists(x => x.Name.Equals(d))))
+                                    {
+                                        <small>@f.FamiliarRelation  \ </small>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    protected List<Patient> Data { get; set; } = new List<Patient>();
+    protected List<string> DiseaseTypes { get; set; } = new List<string>();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            Data.Add(new Patient("40549875643") { FamiliarRelation = "Pai" });
+            Data.Add(new Patient("40149875643") { FamiliarRelation = "Mãe" });
+            Data.Add(new Patient("40849875643") { FamiliarRelation = "Tia 1° grau [Paterna]" });
+            Data.Add(new Patient("41849875643") { FamiliarRelation = "Avó (Materna)" });
+            Data.Add(new Patient("41849875943") { FamiliarRelation = "Bisavó (Materna)" });
+            var firh = new Firh();
+            firh.Login();
+
+            foreach (var p in Data)
+            {
+                foreach (var d in firh.GetDiseases(p.Identifier))
+                {
+                    if (!DiseaseTypes.Exists(x => x == d.Name))
+                    {
+                        DiseaseTypes.Add(d.Name);
+                    }
+                    p.AddDisease(d.Name, d.IsHereditary);
+                }
+            }
+
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+}

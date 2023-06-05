@@ -1,0 +1,54 @@
+﻿@page "/account/login"
+@page "/"
+@attribute [AllowAnonymous()]
+@layout PublicLayout
+<PageTitle>Hierh - Acessar</PageTitle>
+
+
+<div class="card vw-100 vh-100 index-area-card bg-secondary">
+    <div class="card-img-top index-area-card-img" />
+    <form id="login-form" class="card-body mx-auto pt-5 mt-4 text-center w-100" style="max-width: 600px;">
+        <h2 class="card-title text-white fw-bold pb-5">Entrar na Plataforma</h2>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="input-group mb-3">
+                    <span class="input-group-text text-secondary bg-light" id="login-email-area"><i class="fas fa-envelope"></i></span>
+                    <input id="login-email" class="form-control" type="email" placeholder="Digite seu e-mail" aria-describedby="login-email-area" name="Email" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="input-group mb-3">
+                    <span class="input-group-text text-secondary bg-light" id="login-password-area"><i class="fas fa-key"></i></span>
+                    <input id="login-password" class="form-control" type="password" placeholder="Digite sua senha" aria-describedby="login-password-area" name="Password" />
+                </div>
+            </div>
+        </div>
+        <div class="row pt-3">
+            <div class="col">
+                <a class="btn btn-rounded btn-md btn-secondary btn-white-bd fw-bold" href="/account/register">Criar nova conta</a>
+            </div>
+            <div class="col">
+                <a class="btn btn-rounded btn-md btn-white fw-bold" href="/dashboard">Acessar</a>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row pt-3">
+            <div class="col-lg-12 text-center">
+                <a class="link-light small">Esqueci minha senha</a>
+            </div>
+        </div>
+
+        @*        <div class="row">
+        <div class="col-lg-6">
+        <button href="#" class="btn btn-sm btn-default"><i class="text-primary fab fa-facebook"></i> Entrar com o Facebook</button>
+        </div>
+        <div class="col-lg-6">
+        <button href="#" class="btn btn-sm btn-default"><i class="text-danger fab fa-google"></i> Entrar com o Google</button>
+        </div>
+        </div>*@
+    </form>
+</div>

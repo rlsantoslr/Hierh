@@ -1,0 +1,25 @@
+﻿@inherits LayoutComponentBase
+<PageTitle>Hierh - Saúde familiar</PageTitle>
+<div class="page">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-topnavbar">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bold text-white"><i class="fas fa-book-medical"></i> Hierh</a>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <button class="btn btn-sm text-white fw-bold"><i class="fas fa-user-circle"></i> Nome do usuário</button>
+
+                        <button class="btn btn-sm text-white fw-bold mx-2" onclick="logout()"><i class="fas fa-right-from-bracket"></i> Sair</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="pt-5 mt-5">
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
